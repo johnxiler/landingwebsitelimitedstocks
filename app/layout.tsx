@@ -23,7 +23,7 @@ export default function RootLayout({
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#ee7b22" />
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%23ee7b22'>🛍️</text></svg>" />
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ee7b22' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M6 2l1 7h10l1-7'/><path d='M3 9h18l-1.5 11H4.5L3 9z'/><path d='M16 13a4 4 0 0 1-8 0'/></svg>" />
       </head>
       <body className="antialiased bg-white text-gray-900">
         {children}

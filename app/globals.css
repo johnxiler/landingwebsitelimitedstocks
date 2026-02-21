@@ -241,17 +241,6 @@ body {
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(238, 123, 34, 0.3);
 }
-/* .btn-primary::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.2);
-  transition: left 0.3s ease;
-  z-index: 0;
-} */
 
 .btn-secondary {
   background-color: transparent;
@@ -369,21 +358,6 @@ body {
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
   }
 }
-/* .card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #ee7b22, #f5a562);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.card:hover::before {
-  opacity: 1;
-} */
 
 /* Badge styling */
 .badge-orange {
@@ -475,7 +449,97 @@ button, .card {
 }
 
 /* Prevent horizontal scroll on mobile */
-html, body {
+/* html, body {
   overflow-x: hidden;
   width: 100%;
+} */
+
+/* ============================================================ */
+/* 2. CORE LAYOUT RESET */
+/* ============================================================ */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  /* Prevents the "wobble" on mobile if a card is 1px too wide */
+  overflow-x: hidden; 
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-feature-settings: "rlig" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  /* Ensures the page content is always centered vertically if empty */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ============================================================ */
+/* 3. TYPOGRAPHY & ALIGNMENT FIXES */
+/* ============================================================ */
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+  /* Magic property: keeps headers balanced and centered on multiple lines */
+  text-wrap: balance; 
+}
+
+/* Removing the fixed @media h1 scales to let Tailwind's 
+   text-4xl/text-6xl classes from your page.tsx take control */
+
+/* ============================================================ */
+/* 4. UTILITY & COMPONENT CLASSES */
+/* ============================================================ */
+
+/* Use this for your page wrapper if you want a maximum width */
+.container-custom {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  max-width: var(--max-width);
+}
+
+/* Smooth transitions for all interactive elements */
+button, 
+a {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+}
+
+/* Card hover effect used in your LinkCard */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+}
+
+/* ============================================================ */
+/* 5. BRANDED SCROLLBAR & SELECTION */
+/* ============================================================ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::selection {
+  background: var(--primary);
+  color: white;
 }

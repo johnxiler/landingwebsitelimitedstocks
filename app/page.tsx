@@ -1,347 +1,230 @@
-'use client';
+import { ShoppingBag, Video, Facebook, Megaphone } from "lucide-react";
 
-import { useState } from 'react';
-import { ShoppingBag, Video, Facebook, Star, ChevronRight, Shield, CheckCircle, Users, Truck } from "lucide-react";
+/* -------------------- */
+/* LINK CONFIG */
+/* -------------------- */
 
-// Configuration constants
 const LINK_CONFIG = {
-  shopeeVideo: 'https://ph.shp.ee/ynvytjz?smtt=0.0.9',
-  facebook: 'https://www.facebook.com/profile.php?id=61577993293144',
-  shopeeStore: 'https://collshp.com/comrel1x03?view=storefront',
+  shopeeVideo: "https://ph.shp.ee/ynvytjz?smtt=0.0.9",
+  facebook: "https://www.facebook.com/profile.php?id=61577993293144",
+  shopeeStore: "https://collshp.com/comrel1x03?view=storefront",
+  campaigns: "https://ph.shp.ee/ynvytjz?smtt=0.0.9",
 } as const;
 
-const FEATURES = [
-  {
-    icon: CheckCircle,
-    title: "Quality Tested",
-    description: "Every product is personally tested and verified for quality assurance"
-  },
-  {
-    icon: Shield,
-    title: "Trusted Recommendations",
-    description: "Honest reviews from real usage experience"
-  },
-  {
-    icon: Users,
-    title: "Community Driven",
-    description: "Products chosen based on customer feedback and demand"
-  },
-  {
-    icon: Truck,
-    title: "Fast Shipping",
-    description: "Quick delivery options available for all products"
-  }
-];
+// export default function Home() {
+//   return (
+//     <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-gray-50 text-gray-900">
 
-// Utility functions
-const openExternalLink = (url: string) => {
-  window.open(url, '_blank', 'noopener,noreferrer');
-};
+//       {/* ================= HERO ================= */}
+//       <section className="flex items-center justify-center min-h-[40vh] bg-gradient-to-br from-orange-500 via-orange-600 to-orange-700 text-white px-6">
+//         <div className="max-w-4xl mx-auto text-center">
+//           {/* Brand Name Integration */}
+//           <h1 className="text-4xl sm:text-6xl xl:text-7xl font-bold tracking-tight leading-tight mb-6">
+//             Limited Stocks Essentials
+//           </h1>
 
-// Components
-function Header() {
+//           <p className="max-w-2xl mx-auto mb-4 text-lg sm:text-xl text-orange-100 mb-10">
+//             Access our Shopee videos, storefront, campaigns, and Facebook page instantly. 
+//             Don't miss out on today's top-rated finds!
+//           </p>
+
+//           <a
+//             href={LINK_CONFIG.shopeeStore}
+//             target="_blank"
+//             rel="noopener noreferrer"
+//             className="relative inline-flex items-center gap-2 bg-white text-orange-600 font-extrabold mt-25 px-10 py-8 rounded-xl shadow-lg ring-4 ring-white/30 hover:ring-orange-200 transition-all duration-300 animate-in fade-in zoom-in"
+//           >
+//             {/* The Pulse Effect Rings */}
+//             <span className="absolute -inset-1 rounded-xl bg-white opacity-20 animate-ping"></span>
+            
+//             <ShoppingBag size={15} className="animate-bounce" />
+//             <span className="tracking-wide uppercase text-xl">Visit My Shopee Storefront</span>
+//           </a>
+//         </div>
+//       </section>
+
+//       {/* ================= LINKS SECTION ================= */}
+//           <section className="flex flex-col w-full items-center justify-center overflow-hidden py-20 px-6 pb-32">
+//             <div className="max-w-3xl mx-auto text-center mb-14">
+//               <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+//                 Explore Our Links
+//               </h2>
+//               <p className="text-gray-600">
+//                 Click below to access our official pages and campaigns.
+//               </p>
+//             </div>
+
+//             <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+              
+//               <LinkCard
+//                 icon={<Video size={26} />}
+//                 title="Shopee Videos"
+//                 description="Watch our latest Shopee affiliate video content."
+//                 href={LINK_CONFIG.shopeeVideo}
+//                 button="Watch Now"
+//               />
+
+//              <LinkCard
+//                 icon={<Megaphone size={26} />}
+//                 title="Campaigns"
+//                 description="Discover our current Shopee campaigns."
+//                 href={LINK_CONFIG.campaigns}
+//                 button="View Campaign"
+//               />
+
+//               <LinkCard
+//                 icon={<Facebook size={26} />}
+//                 title="Facebook Page"
+//                 description="Follow us for updates and new promotions."
+//                 href={LINK_CONFIG.facebook}
+//                 button="Follow Page"
+//               />
+//             </div>
+//           </section>
+      
+//         <footer className="mt-auto py-12 border-t border-gray-200 bg-white text-center text-gray-500 text-sm">
+//           <div className="max-w-6xl mx-auto px-6">
+//             © {new Date().getFullYear()} Limited Stocks Essentials. All rights reserved.
+//           </div>
+//         </footer>
+//     </div>
+//   );
+// }
+
+export default function Home() {
   return (
-    <header className="bg-white/90 backdrop-blur-md border-b border-gray-200/50 py-4 sticky top-0 z-50 shadow-sm">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-[1fr_auto_1fr] items-center">
-          <div />
-          <div className="flex items-center gap-3">
-            <div className="flex items-baseline gap-2">
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
-                Limited Stocks
-              </h1>
-              <span className="text-sm font-semibold bg-orange-100 text-orange-700 px-3 py-1 rounded-full">
-                Essentials
-              </span>
-            </div>
-          </div>
-          <div className="flex items-center justify-end gap-2 text-orange-600">
-            <ShoppingBag className="w-5 h-5" />
-            <span className="text-sm font-medium hidden sm:block">Curated Daily</span>
-          </div>
-        </div>
-      </div>
-    </header>
-  );
-}
+    /* We use flex-col and min-h-screen to ensure the footer stays at the bottom 
+       even if there are few cards */
+    <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-gray-50 text-gray-900">
 
-function HeroSection({ onShopNow }: { onShopNow: () => void }) {
-  return (
-    <section className="relative flex items-center py-16 sm:py-24 lg:py-32 min-h-[60vh] sm:min-h-[70vh] bg-gradient-to-br from-orange-500 via-orange-600 to-amber-600 text-white overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-orange-400/20 to-amber-600/30" />
-      <div className="relative w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
-        <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30 mb-8 mx-auto">
-          <CheckCircle className="w-4 h-4" />
-          <span className="text-sm font-medium">Trusted Recommendations</span>
-        </div>
+      {/* ================= HERO ================= */}
+      <section className="flex items-center justify-center min-h-[50vh] bg-gradient-to-br from-orange-500 via-orange-600 to-orange-700 text-white px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          
+          {/* 1. Added mb-8 for spacing below the title */}
+          <h1 className="text-4xl sm:text-6xl xl:text-7xl font-bold tracking-tight leading-tight mb-8">
+            Limited Stocks Essentials
+          </h1>
 
-        <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-          Your Daily Dose of
-          <span className="block mt-3 text-white">Smart Shopping</span>
-        </h2>
+          {/* 2. Increased mb-12 to push the button further down */}
+          <p className="max-w-2xl mx-auto text-lg sm:text-xl text-orange-100 mb-14 leading-relaxed">
+            Access our Shopee videos, storefront, campaigns, and Facebook page instantly. 
+            Don't miss out on today's top-rated finds!
+          </p>
 
-        <p className="text-base sm:text-xl text-white/90 max-w-xl sm:max-w-2xl mx-auto mb-8 leading-relaxed">
-          Discover quality products that have been tested and recommended for everyday excellence.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button
-            onClick={onShopNow}
-            className="w-full sm:w-auto bg-white text-orange-600 font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-orange-50 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+          <a
+            href={LINK_CONFIG.shopeeStore}
+            target="_blank"
+            rel="noopener noreferrer"
+            /* - Added px-12 (horizontal room)
+              - Added py-5 (vertical room)
+              - Added min-w-fit to ensure it doesn't shrink on mobile
+            */
+            className="relative inline-flex items-center justify-center gap-4 bg-white text-orange-600 font-extrabold px-12 py-6 rounded-2xl shadow-2xl ring-4 ring-white/30 hover:ring-orange-200 hover:scale-105 transition-all duration-300 group"
           >
-            Start Shopping Now
-            <ChevronRight className="w-5 h-5" />
-          </button>
-          <button className="w-full sm:w-auto text-white font-medium px-6 py-3 border-2 border-white/30 rounded-xl hover:bg-white/10 transition-colors">
-            Learn More
-          </button>
+            {/* The Pulse Effect */}
+            <span className="absolute -inset-1 rounded-2xl bg-white opacity-20 animate-ping"></span>
+            
+            {/* Icon with slightly larger size for balance */}
+            <ShoppingBag size={24} className="transition-transform group-hover:scale-110" />
+            
+            {/* Text with letter spacing for a premium look */}
+            <span className="tracking-wider uppercase text-lg sm:text-xl whitespace-nowrap">
+              Visit My Shopee Storefront
+            </span>
+          </a>
+          
         </div>
-      </div>
-    </section>
-  );
-}
+      </section>
 
-function FeaturesSection() {
-  return (
-    <section className="py-16 sm:py-24 bg-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-700 px-4 py-2 rounded-full mb-6 mx-auto">
-            <Star className="w-4 h-4" />
-            <span className="text-sm font-medium">WHY CHOOSE US</span>
-          </div>
-          <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            The Limited Stocks Difference
-          </h3>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            We go the extra mile to ensure you get only the best products
+      {/* ================= LINKS SECTION ================= */}
+      {/* 1. Removed the extra nested div that was breaking the flow.
+          2. Added pb-32 to create massive breathing room before the footer.
+      */}
+      <section className="flex flex-col items-center justify-center flex-grow py-24 pb-32 px-6">
+        <div className="max-w-3xl mx-auto text-center mt-12 mb-20">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6 tracking-tight text-gray-900">
+            Explore Our Links
+          </h2>
+          <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
+            Click below to access our official pages and campaigns. 
+            We've curated the best essentials just for you.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {FEATURES.map((feature, index) => (
-            <div key={index} className="text-center group">
-              <div className="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-orange-200 transition-colors">
-                <feature.icon className="w-8 h-8 text-orange-600" />
-              </div>
-              <h4 className="text-xl font-semibold text-gray-900 mb-3">
-                {feature.title}
-              </h4>
-              <p className="text-gray-600 leading-relaxed">
-                {feature.description}
-              </p>
-            </div>
-          ))}
+        {/* max-w-6xl gives more room for 3 columns to breathe */}
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center">
+          <LinkCard
+            icon={<Video size={26} />}
+            title="Shopee Videos"
+            description="Watch our latest Shopee affiliate video content."
+            href={LINK_CONFIG.shopeeVideo}
+            button="Watch Now"
+          />
+
+          <LinkCard
+            icon={<Megaphone size={26} />}
+            title="Campaigns"
+            description="Discover our current Shopee campaigns."
+            href={LINK_CONFIG.campaigns}
+            button="View Campaign"
+          />
+
+          <LinkCard
+            icon={<Facebook size={26} />}
+            title="Facebook Page"
+            description="Follow us for updates and new promotions."
+            href={LINK_CONFIG.facebook}
+            button="Follow Page"
+          />
         </div>
-      </div>
-    </section>
-  );
-}
-
-interface ConnectionCardProps {
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  description: string;
-  buttonText: string;
-  onClick: () => void;
-  color?: string;
-}
-
-function ConnectionCard({ icon: Icon, title, description, buttonText, onClick, color = 'orange' }: ConnectionCardProps) {
-  const colorClasses = {
-    orange: 'bg-orange-100 text-orange-600',
-    blue: 'bg-blue-100 text-blue-600',
-  }[color];
-
-  const buttonColor = {
-    orange: 'bg-orange-600 hover:bg-orange-700',
-    blue: 'bg-blue-600 hover:bg-blue-700',
-  }[color];
-
-  return (
-    <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-      <div className="text-center">
-        <div className={`w-12 h-12 ${colorClasses} rounded-xl flex items-center justify-center mx-auto mb-4`}>
-          <Icon className="w-6 h-6" />
+      </section>
+      
+      {/* ================= FOOTER ================= */}
+      {/* mt-auto ensures this stays at the very bottom */}
+      <footer className="mt-auto py-12 border-t border-gray-200 bg-white text-center text-gray-500 text-sm">
+        <div className="max-w-6xl mx-auto px-6">
+           © {new Date().getFullYear()} Limited Stocks Essentials. All rights reserved.
         </div>
-        <h4 className="text-xl font-semibold text-gray-900 mb-3">
-          {title}
-        </h4>
-        <p className="text-gray-600 mb-6 leading-relaxed">
-          {description}
-        </p>
-        <button
-          onClick={onClick}
-          className={`w-full ${buttonColor} text-white font-semibold py-3 px-4 rounded-xl hover:shadow-lg transition-all`}
-        >
-          {buttonText}
-        </button>
-      </div>
+      </footer>
     </div>
   );
 }
+/* ================= LINK CARD COMPONENT ================= */
 
-function ConnectSection({ onLinkClick }: { onLinkClick: (url: string) => void }) {
-  const [copied, setCopied] = useState(false);
-
-  const copyAffiliateName = () => {
-    navigator.clipboard.writeText('Limited Stocks Essentials');
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  return (
-    <section className="py-16 sm:py-24 bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-700 px-4 py-2 rounded-full mb-6 mx-auto">
-            <Users className="w-4 h-4" />
-            <span className="text-sm font-medium">CONNECT WITH US</span>
-          </div>
-          <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Join Our Community
-          </h3>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Stay updated with the latest deals and product recommendations
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <ConnectionCard
-            icon={ShoppingBag}
-            title="Shopee Store"
-            description="Browse our curated collection of quality products with exclusive deals"
-            buttonText="Visit Store"
-            onClick={() => onLinkClick(LINK_CONFIG.shopeeStore)}
-          />
-          
-          <ConnectionCard
-            icon={Video}
-            title="Video Channel"
-            description="Watch product demonstrations and honest reviews before you buy"
-            buttonText="Watch Videos"
-            onClick={() => onLinkClick(LINK_CONFIG.shopeeVideo)}
-          />
-          
-          <ConnectionCard
-            icon={Facebook}
-            title="Facebook"
-            description="Join our community for updates, tips, and special announcements"
-            buttonText="Follow Us"
-            onClick={() => onLinkClick(LINK_CONFIG.facebook)}
-            color="blue"
-          />
-          
-          <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-            <div className="text-center">
-              <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <Star className="w-6 h-6" />
-              </div>
-              <h4 className="text-xl font-semibold text-gray-900 mb-3">
-                Our Affiliate
-              </h4>
-              <p className="text-gray-600 mb-4 leading-relaxed">
-                Shop through our verified affiliate account for the best deals
-              </p>
-              
-              <div className="bg-orange-50 p-4 rounded-xl border-2 border-orange-200 mb-4">
-                <p className="text-center font-bold text-orange-700">
-                  Limited Stocks Essentials
-                </p>
-              </div>
-              
-              <button
-                onClick={copyAffiliateName}
-                className="w-full bg-gray-100 text-gray-700 font-semibold py-3 px-4 rounded-xl hover:bg-gray-200 transition-colors"
-              >
-                {copied ? '✓ Copied!' : 'Copy Name'}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+interface LinkCardProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  href: string;
+  button: string;
 }
 
-function CTASection({ onShopNow }: { onShopNow: () => void }) {
+function LinkCard({ icon, title, description, href, button }: LinkCardProps) {
   return (
-    <section className="py-16 sm:py-24 bg-gradient-to-r from-orange-500 to-amber-600 text-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h3 className="text-2xl sm:text-4xl font-bold mb-6">
-          Ready to Discover Quality Products?
-        </h3>
-        <p className="text-base sm:text-lg opacity-95 mb-8 max-w-2xl mx-auto">
-          Join thousands of satisfied customers who trust Limited Stocks for honest recommendations and quality products.
-        </p>
-        <button
-          onClick={onShopNow}
-          className="w-full sm:w-auto bg-white text-orange-600 font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-orange-50 transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl inline-flex items-center justify-center gap-2"
-        >
-          Start Shopping Now
-          <ChevronRight className="w-5 h-5" />
-        </button>
+    <div className="w-full max-w-md bg-white p-8 rounded-2xl border border-gray-200 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center">
+      {/* Icon Container */}
+      <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-orange-100 text-orange-600 mb-6">
+        {icon}
       </div>
-    </section>
-  );
-}
 
-function Footer() {
-  return (
-    <footer className="bg-gray-900 text-gray-300 py-12">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8 text-center max-w-3xl mx-auto justify-items-center">
-          <div>
-            <h5 className="text-white font-bold text-lg mb-4 flex items-center justify-center gap-2">
-              🛍️ Limited Stocks Essentials
-            </h5>
-            <p className="text-gray-400 leading-relaxed">
-              Your trusted source for quality-tested products and honest recommendations.
-            </p>
-          </div>
-          
-          <div>
-            <h5 className="text-white font-bold text-lg mb-4">
-              Security & Privacy
-            </h5>
-            <p className="text-gray-400 leading-relaxed">
-              🔒 Your privacy is our priority. All external links open securely with protection.
-            </p>
-          </div>
-        </div>
-        
-        <div className="border-t border-gray-700 pt-8 text-center">
-          <p className="text-gray-400 font-medium mb-2">
-            © 2026 Limited Stocks Essentials. All rights reserved.
-          </p>
-          <p className="text-gray-500 text-sm">
-            Quality products, honest recommendations, trusted by thousands.
-          </p>
-        </div>
-      </div>
-    </footer>
-  );
-}
+      {/* Title */}
+      <h3 className="text-xl font-semibold mb-3">{title}</h3>
 
-export default function Home() {
-  const handleLinkClick = (url: string) => {
-    openExternalLink(url);
-  };
+      {/* Description - Added mb-10 for breathing room and flex-grow to align buttons */}
+      <p className="text-gray-600 text-sm mb-10 flex-grow leading-relaxed">
+        {description}
+      </p>
 
-  const handleShopNow = () => {
-    handleLinkClick(LINK_CONFIG.shopeeStore);
-  };
-
-  return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      <main>
-        <HeroSection onShopNow={handleShopNow} />
-        <FeaturesSection />
-        <ConnectSection onLinkClick={handleLinkClick} />
-        <CTASection onShopNow={handleShopNow} />
-      </main>
-      <Footer />
+      {/* Action Button */}
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="w-full inline-block bg-orange-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-orange-700 transition-colors duration-300 shadow-sm"
+      >
+        {button}
+      </a>
     </div>
   );
 }

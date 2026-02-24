@@ -54,22 +54,21 @@ export default function CatalogPage() {
     return (
         <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-gray-50 text-gray-900 selection:bg-orange-100">
 
-            {/* ================= HERO (Matches Landing) ================= */}
-            <section className="flex items-center justify-center bg-gradient-to-br from-orange-500 via-orange-600 to-orange-700 text-white px-6 select-none relative">
-                <div className="max-w-4xl mx-auto text-center py-20">
+            <section className="flex items-center justify-center bg-gradient-to-br from-orange-500 via-orange-600 to-orange-700 text-white px-6 select-none relative overflow-hidden">
+                <div className="max-w-4xl mx-auto text-center py-16 sm:py-20 flex flex-col items-center">
                     <Link
                         href="/"
-                        className="absolute top-6 left-6 inline-flex items-center gap-2 text-orange-50 hover:text-white transition-all text-sm font-medium"
+                        className="mb-8 sm:absolute sm:top-6 sm:left-6 inline-flex items-center gap-2 text-orange-50 hover:text-white transition-all text-sm font-medium bg-white/10 px-4 py-2 rounded-full sm:bg-transparent sm:px-0 sm:py-0"
                     >
                         <ArrowLeft size={16} />
                         Back to Home
                     </Link>
 
-                    <h1 className="text-4xl sm:text-6xl font-bold tracking-tight mb-6">
+                    <h1 className="text-4xl sm:text-6xl font-bold tracking-tight mb-6 leading-tight">
                         Product Catalog
                     </h1>
 
-                    <p className="max-w-2xl mx-auto text-lg text-orange-50 font-normal">
+                    <p className="max-w-2xl mx-auto text-base sm:text-lg text-orange-50 font-normal leading-relaxed">
                         Browse our curated collection of affiliate products across Shopee, TikTok, and Lazada.
                     </p>
                 </div>
@@ -80,7 +79,7 @@ export default function CatalogPage() {
                 <div className="max-w-7xl mx-auto">
 
                     {/* Platform Tabs */}
-                    <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
+                    <div className="mobile-filter-scroll mb-12">
                         {PLATFORM_FILTERS.map((filter) => (
                             <button
                                 key={filter}
@@ -148,6 +147,7 @@ export default function CatalogPage() {
                                             fill
                                             className="object-cover transition-transform duration-500 group-hover:scale-110"
                                             unoptimized
+                                            priority={idx < 4}
                                             onError={(e) => {
                                                 const target = e.target as HTMLImageElement;
                                                 target.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect fill="%23f3f4f6" width="200" height="200"/><text fill="%239ca3af" font-size="14" text-anchor="middle" x="100" y="105">No Image</text></svg>';

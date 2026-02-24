@@ -61,13 +61,15 @@ function parseCSVRow(row: string): string[] {
     return result;
 }
 
+type FetchOptions = RequestInit & { next?: { revalidate?: number } };
+
 export async function GET() {
     try {
         const results = await Promise.allSettled(
             PLATFORMS.map(async (platform) => {
                 const res = await fetch(`${BASE_URL}${platform.gid}`, {
                     next: { revalidate: 300 },
-                } as any);
+                } as FetchOptions);
 
                 if (!res.ok) throw new Error(`Failed to fetch ${platform.name}`);
 

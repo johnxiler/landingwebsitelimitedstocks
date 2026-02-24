@@ -62,13 +62,15 @@ export async function GET() {
         { name: "Lazada", gid: "1012479694", color: "#101566" }
     ];
 
+    type FetchOptions = RequestInit & { next?: { revalidate?: number } };
+
     try {
         const selectedPlatform = platforms[Math.floor(Math.random() * platforms.length)];
 
         // Using "as any" to bypass TypeScript lint error for Next.js specific fetch options
         const response = await fetch(`${BASE_URL}${selectedPlatform.gid}`, {
             next: { revalidate: 60 }
-        } as any);
+        } as FetchOptions);
 
         const csvText = await response.text();
         const rows = csvText.split(/\r?\n/).slice(1).filter(row => row.trim() !== "");

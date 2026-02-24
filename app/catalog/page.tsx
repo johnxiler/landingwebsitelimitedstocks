@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowLeft, Loader2, Tag } from 'lucide-react';
 
 interface Product {
@@ -141,11 +142,12 @@ export default function CatalogPage() {
                             {filtered.map((product, idx) => (
                                 <div key={`${product.platform}-${idx}`} className="catalog-card group border border-gray-100 overflow-hidden rounded-2xl bg-white shadow-sm hover:shadow-md transition-all">
                                     <div className="catalog-card-img-wrap relative aspect-square bg-gray-50 overflow-hidden">
-                                        <img
+                                        <Image
                                             src={product.image}
                                             alt={product.name}
-                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                            loading="lazy"
+                                            fill
+                                            className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                            unoptimized
                                             onError={(e) => {
                                                 const target = e.target as HTMLImageElement;
                                                 target.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect fill="%23f3f4f6" width="200" height="200"/><text fill="%239ca3af" font-size="14" text-anchor="middle" x="100" y="105">No Image</text></svg>';
